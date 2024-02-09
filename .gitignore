@@ -1,0 +1,4 @@
+/.vs
+obj/
+**/bin/
+/FolioAid.Web/ClientApp

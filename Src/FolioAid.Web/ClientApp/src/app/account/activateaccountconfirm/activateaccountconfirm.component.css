@@ -1,0 +1,14 @@
+.fa-circle-check {
+  font-size: 70px;
+  color: green;
+  background-color: lightgreen;
+  border-radius: 50%;
+  padding: 10px;
+}
+p{
+    font-size:24px;
+}
+.btn{
+    width:230px;
+    height:70px;
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<div class="containe" id="progressbar">
+  <c-progress class="" *ngIf="formsubmit" style="border-radius: 0px !important;">
+    <c-progress-bar [animated]="true" color="warning" [value]="progressValue" variant="striped"></c-progress-bar>
+  </c-progress>
+</div>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Portfolio</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel='stylesheet' type='text/css' media='screen' href='/assets/css/style.css'>
+  <script src='main.js'></script>
+</head>
+
+<body>
+  <section class="listing-header">
+    <div class="row">
+      <h1>Portfolio</h1>
+      <div class="container">
+        <div class="content banner-content">
+          <div class="input-group">
+            <input type="search" class="form-control rounded" placeholder="All Category" [(ngModel)]="search"aria-label="Search" aria-describedby="search-addon" />-->
+            <button type="button" class="btn btn-outline-primary" (click)="getData()">Search Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="listing">
+      <div class="container">
+        <div class="content">
+          <div class="add-new-project d-flex align-items-center justify-content-between top-bar">
+            <h1>Portfolio List</h1>
+          
+          </div>
+          <div class="row">
+            <div class="col-lg-4 col-md-12">
+              <div class="category">
+                <div class="technology">
+                  <h4>Technology</h4>
+                  <div class="categories">
+                    <div class="form-check" *ngFor="let item of technologyGridResult" (change)="onTechnologyChange(item,$event)">
+                      <input class="form-check-input" type="checkbox" value="{{item.id}}">
+                      <label class="form-check-label" for="aspid">
+                        {{item.name}}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="border"></div>
+                <div class="industry">
+                  <h4>Industry</h4>
+                  <div class="categories">
+                    <div class="form-check" *ngFor="let item of industryGridResult" (change)="onIndustryChange(item,$event)">
+                      <input class="form-check-input" type="checkbox" value="{{item.id}}">
+                      <label class="form-check-label" for="healthid">
+                        {{item.name}}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8 col-md-12">
+              <div class="cards">
+                <div class="row">
+                  <div class="col-md-6" *ngFor="let item of gridResult">
+                    <div class="item">
+                      <img src={{item.bannerImage}}>
+                      <div class="text">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <p id="text"><span *ngFor="let data of item.industries">{{data}}&nbsp;&nbsp;</span></p>
+                          <div class="actions">
+                            <span class=" me-2"><i class="fa fa-eye" (click)="viewProjectDetail(item)"></i></span>
+                          </div>
+                        </div>
+                        <h4 class="name">{{item.title}}</h4>
+
+                        <div>
+                          <p class="desc" *ngIf="showFullContent!=item.id">
+                            {{ item.summary | slice:0:maxLength }}...<br />
+
+                          </p>
+
+                          <p class="desc" *ngIf="showFullContent==item.id">
+                            {{item.summary}}
+                          </p>
+
+                          <div>
+                            <button (click)="toggleContent($event,item)" class="dir" name="{{item.id}}" value="{{item.id}}">
+                              {{ showFullContent==item.id ? 'See Less' : 'See More' }}
+                            </button>
+                          </div>
+                        </div>
+                        <div class="pills">
+                          <span class="badge" *ngFor="let data of item.technologies">{{data}}</span>
+                        </div>
+                        <button type="button" class="btn btn-primary" (click)="viewProjectDetail(item) ">View Details </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <mat-paginator #paginator
+                           class="demo-paginator"
+                           (page)="handlePageEvent($event)"
+                           [length]="length"
+                           [pageSize]="pageSize"
+                           [showFirstLastButtons]="showFirstLastButtons"
+                           [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+                           [pageIndex]="currentPage"
+                           aria-label="Select page">
+            </mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

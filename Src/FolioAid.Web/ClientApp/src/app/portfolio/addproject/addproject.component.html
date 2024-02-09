@@ -1,0 +1,171 @@
+  <!-- Additional CSS Files -->
+<div class="containe" id="progressbar">
+  <c-progress class="" *ngIf="formsubmit" style="border-radius: 0px !important;">
+    <c-progress-bar [animated]="true" color="warning" [value]="progressValue" variant="striped"></c-progress-bar>
+  </c-progress>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+<header class="listing-header">
+  <div class="row">
+    <h1 *ngIf="!isEdit">Add Project</h1>
+    <h1 *ngIf="isEdit">Update Project</h1>
+  </div>
+</header>
+
+<section>
+  <div class="listing">
+    <div class="container">
+      <div class="add-form">
+        <form [formGroup]="projectForm">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="formFile" class="form-label">Upload Banner</label>
+                <div *ngIf="isEdit">
+                  <img [src]="bannerImage" class="img-wrap">
+                </div>
+                <input class="form-control" type="file" id="bannerImage" (change)="fileUpload($event)" accept="image/*">
+                <div class="form-text text-danger" *ngIf="projectForm.controls['bannerImage'].dirty && projectForm.hasError('required','bannerImage')">Banner Image is required</div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="form-label">Project Title</label>
+                <input type="text" class="form-control" placeholder="Enter here" formControlName="title" id="exampleFormControlInput1">
+                <div class="form-text text-danger" *ngIf="(projectForm.controls['title'].dirty ||projectForm.controls['title'].touched) && projectForm.hasError('required','title')">Title is required</div>
+                <div class="form-text text-danger" *ngIf="projectForm.hasError('maxLength','title')&& (projectForm.controls['title'].dirty ||projectForm.controls['title'].touched) ">Password is Required Minimum 8 characters</div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="form-label">Industry</label>
+                <kendo-multiselect [data]="industryGridResult"
+                                   formControlName="industries"
+                                   [textField]="'name'"
+                                   [valueField]="'id'"
+                                   placeholder="Select Industry"
+                                   [valuePrimitive]="true"
+                                   class="form-select form-select-lg"></kendo-multiselect>
+                <div class="form-text text-danger" *ngIf="(projectForm.controls['industries'].dirty ||projectForm.controls['industries'].touched) && projectForm.hasError('required','industries')">Industry is required</div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="form-label">Technology</label>
+                <kendo-multiselect [data]="technologyGridResult"
+                                   formControlName="technologies"
+                                   [textField]="'name'"
+                                   [valueField]="'id'"
+                                   placeholder="Select Technology"
+                                   [valuePrimitive]="true"
+                                   class="form-select form-select-lg"></kendo-multiselect>
+                <div class="form-text text-danger" *ngIf="(projectForm.controls['technologies'].dirty ||projectForm.controls['technologies'].touched) && projectForm.hasError('required','technologies')">Technology is required</div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="form-label">Overview</label>
+                <textarea kendoTextArea type="text" class="form-control" id="summary" rows="8" formControlName="summary"></textarea>
+                <div class="form-text text-danger" *ngIf="(projectForm.controls['summary'].dirty ||projectForm.controls['summary'].touched) && projectForm.hasError('required','summary')">Overview is required</div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="form-label">Challenges</label>
+                <textarea kendoTextArea type="text" class="form-control" id="challenges" rows="8" formControlName="challenges"></textarea>
+                <div class="form-text text-danger" *ngIf="(projectForm.controls['challenges'].dirty ||projectForm.controls['challenges'].touched) && projectForm.hasError('required','challenges')">Challenges are required</div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="form-label">Solutions</label>
+                <textarea kendoTextArea type="text" class="form-control" id="solutions" rows="8" formControlName="solutions"></textarea>
+                <div class="form-text text-danger" *ngIf="(projectForm.controls['solutions'].dirty ||projectForm.controls['solutions'].touched) && projectForm.hasError('required','solutions')">Solutions are required</div>
+              </div>
+            </div>
+            <br />
+            <br />
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="form-label">Screen Gallery</label>
+                <div class="gallery">
+                  <div *ngFor='let url of images'>
+                    <img [src]="url" class="img-wrap"><br />
+                    <button *ngIf="showIcon" class="overlay" (click)="deleteImg(url)">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </div>
+                </div>
+                <input type="file" (change)="onSelectImage($event)" multiple class="form-control" accept="image/*">
+                <div class="form-text text-danger" *ngIf="(projectForm.controls['imagesPath'].dirty ||projectForm.controls['imagesPath'].touched) && projectForm.hasError('required','imagesPath')">Images are required</div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="form-label">Video Gallery</label>
+                <div class="gallery">
+                  <div *ngFor="let url of  videoUrls">
+                    <video [src]="url" class="img-wrap" controls></video> <br />
+                    <button *ngIf="showVideoIcon" class="overlay" (click)="deleteVideo(url)">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </div>
+                </div>
+                <input type='file' (change)="onSelectVideo($event)" multiple class="form-control" accept="video/*" />
+                <div class="form-text text-danger" *ngIf="(projectForm.controls['videosPath'].dirty ||projectForm.controls['videosPath'].touched) && projectForm.hasError('required','videosPath')">Videos are required</div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label class="form-label">Public URL</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter URL" formControlName="publicURL">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label class="form-label">Demo URL</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter URL" formControlName="demoURL">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label class="form-label">Google Play URL</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter URL" formControlName="androidURL">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label class="form-label">App Store URL</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter URL" formControlName="appleURL">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="form-label d-block">Status</label>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="inlineRadio1"
+                         [value]="active" formControlName="status">
+                  <label class="form-check-label" for="inlineRadio1">Active</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="inlineRadio2"
+                         [value]="inactive" formControlName="status">
+                  <label class="form-check-label" for="inlineRadio2">Inactive</label>
+                </div>
+                <div class="form-text text-danger" *ngIf="(projectForm.controls['status'].dirty ||projectForm.controls['status'].touched) && projectForm.hasError('required','status')">Status is required</div>
+              </div>
+            </div>
+            <div class="details-btns text-center">
+              <a class="btn btn-theme btn-outline me-3" (click)="reset()">Reset Changes</a>
+              <a class="btn btn-theme"  *ngIf="!isEdit" href="#progressbar" (click)="addNewProject()">Save</a>
+              <a class="btn btn-theme" *ngIf="isEdit" (click)="updateProject()">Update</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

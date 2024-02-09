@@ -1,0 +1,38 @@
+
+
+/*style
+*/
+.contact-form {
+  padding: 100px 20px;
+}
+
+  .contact-form .card {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 30px;
+    border: 0;
+  }
+
+    .contact-form .card .form-control {
+      background: #EFEFEF;
+      border: 0;
+      padding: 16px 10px;
+      border-radius: 6px;
+      font-size: 18px;
+    }
+
+    .contact-form .card label {
+      color: #000;
+      font-size: 18px;
+    }
+
+  .contact-form .vector3 {
+    right: 0;
+    left: unset;
+  }
+
+  .contact-form .vector4 {
+    width: 90px;
+    bottom: 10px;
+  }

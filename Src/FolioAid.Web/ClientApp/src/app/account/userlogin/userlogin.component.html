@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Log In</title>
+
+</head>
+<body>
+  
+  <section class="login">
+    <div class="container-fluid">
+      <div class="bg-card">
+        <div class="containe">
+          <c-progress class="mb-3" style="border-radius: 0px !important;" *ngIf="formsubmit">
+            <c-progress-bar [animated]="true" color="warning" [value]="progressValue" variant="striped"></c-progress-bar>
+          </c-progress>
+        </div>
+        <div class="row align-items-center m-0">
+
+
+          <div class="col-xl-6 col-lg-12 col-md-12">
+            <div class="login-wrap d-flex align-items-center">
+              <div class="content-left">
+                <div class="info">
+                  <a href="index.html" class="logo">
+                    <img src="assets/images/Logo.png" alt="" class="img-fluid logo-white">
+                  </a>
+                  <h1>Welcome Back!</h1>
+                </div>
+                <img src="/assets/images/mockup.png" alt="" class="img-fluid mockup">
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-12 col-md-12">
+            <div class="content">
+              <form [formGroup]="loginform" (ngSubmit)="loginsubmited()">
+                <div class="heading text-center">
+                  <h1>Login</h1>
+                  <p>Please fill the required data fields.</p>
+                </div>
+                <div class="input-wrapr">
+                  <div class="fields">
+                    <div class="input-group">
+                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
+                      <input type="text" class="form-control" placeholder="Username" aria-label="Username" formControlName="useremail" aria-describedby="basic-addon1">
+
+                    </div>
+                    <div class="form-text text-danger" *ngIf="UserEmail.errors?.['email']&& (UserEmail.touched || UserEmail.dirty )">Email is Invailid</div>
+                    <div class="form-text text-danger" *ngIf="UserEmail.errors?.['required']&& (UserEmail.touched || UserEmail.dirty )">Email is Required</div>
+                    <div class="input-group mb-0">
+                      <span class="input-group-text"><i class="fa fa-key"></i></span>
+                      <input type="password" class="form-control" placeholder="Password" formControlName="password" [type]="type">
+                      <span (click)="hideShowPass()" class="input-group-text"> <i class="fa {{eyeIcon}} icon-right "> </i></span>
+                      <!--<span class="input-group-text icon-right"><i class="fa fa-eye-slash"></i></span>-->
+                    </div>
+                    <div class="form-text text-danger" *ngIf="UserPassword.errors?.['required'] && (UserPassword.touched || UserPassword.dirty)"> Password is Required</div>
+                    <div class="form-text text-danger" *ngIf="UserPassword.errors?.['minlength']&& (UserPassword.touched || UserPassword.dirty )">Password is Required Minimum 8 characters</div>
+                  </div>
+                  <!--<button class="frgt" (click)="openDialog()"  style=" border: 0px; float: right;"  >Forgot Password?</button>-->
+                  <a class="frgt" [routerLink]="['/sendmailforgotpassword']">Forgot Password?</a>
+                </div>
+                <div class="button-btm">
+
+                  <button class="btn btn-theme w-100"  type="submit" [disabled]="isButtonDisabled">Login</button>
+
+                </div>
+                <p class="btm-line">
+                  Don’t have an account? <a [routerLink]="['/sign-up']">
+                    Sign
+                    Up
+                  </a>
+                </p>
+                <p class="divider-text text-center">OR</p>
+                <div class="text-center btm-btns">
+                  <a class="btn btn-theme btn-google me-3">
+                    <img src="/assets/images/google-icon.png" alt="" class="img-fluid"> Sign up with Google
+                  </a>
+                  <a class="btn btn-theme btn-google">
+                    <img src="/assets/images/facebook-icon.png" alt="" class="img-fluid"> Sign up with Facebook
+                  </a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
+
+
+
+
+
+
+
+

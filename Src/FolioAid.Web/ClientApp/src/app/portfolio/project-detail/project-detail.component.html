@@ -1,0 +1,121 @@
+
+<div class="containe" id="progressbar">
+  <c-progress  *ngIf="formsubmit" style="border-radius: 0px !important;">
+    <c-progress-bar [animated]="true" color="warning" [value]="progressValue" variant="striped"></c-progress-bar>
+  </c-progress>
+</div>
+<link rel="stylesheet" href="/assets/css/style.css">
+<section class="listing-header">
+  
+    <!-- <div class="logo"><a href="index.html"><img src="assets/images/Logo-White.png" alt=""></a></div> -->
+    <div class="row">
+      <h1>Project - {{projectDetail.title}}</h1>
+    </div>
+</section>
+    <div class="detail-page" >
+        <section>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12 col-md-12" >
+                        <div class="content">
+                            <span class="sub-title" *ngFor="let data of projectDetail.industriesName">{{data}}</span>
+                            <h4>{{projectDetail.title}}</h4>
+                            <div class="pills">
+                                <span class="badge"  *ngFor="let data of projectDetail.technologiesName">{{data}}</span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="summary-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Project Summary</h4>
+                            <p>{{projectDetail.summary}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="summary-content">
+                    <div class="row align-items-center m-0">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="text">
+                                <h4>Key Challeges</h4>
+                                <p>{{projectDetail.challenges}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="summary-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Our Solutions</h4>
+                            <p>{{projectDetail.solutions}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slider-bg summary-content">
+            <div class="container">
+                <div>
+                    <h4 class="title">Product Screens</h4>
+                </div>
+                <div class="sv-slider">
+                    <ngb-carousel  #myCarousel="ngbCarousel" [activeId]="'0'">
+                          <ng-template ngbSlide *ngFor="let image of projectDetail.imagesPath;let i = index" id="{{i}}">
+                            <img   width="100%" height="560" [src]="image">
+                          </ng-template>
+                    </ngb-carousel>
+                      <ul class="carousel-thumbnail">
+                        <li class="carousel-thumbnail__item list-inline-item" *ngFor="let image of projectDetail.imagesPath;let i = index"(click)="cycleToSlide(i)">
+                          <a class="selected">
+                            <img class="carousel-thumbnail__img" [src]="image">
+                          </a>
+                        </li>
+                      </ul> 
+                </div>
+            </div>
+        </section>
+    
+        <section class="mb-5">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-lg-12 col-md-12">
+                <div style=" text-align:center;margin:0; padding:0;">
+                  <ng-image-slider #nav [images]="videoObjects" [infinite]="false" [autoSlide]="1"
+                                   [imageSize]="{width: '100%', height: 560}" slideImage="1"></ng-image-slider>
+                </div>
+              </div>
+            </div>
+            <div class="details-btns text-center mt-4">
+              <div class="mb-3">
+                <a class="btn btn-theme me-3" target="_blank" [href]="projectDetail.publicURL" *ngIf="projectDetail.publicURL">Live URL</a>
+                <a class="btn btn-theme btn-outline" target="_blank" [href]="projectDetail.demoURL" *ngIf="projectDetail.demoURL">Demo</a>
+              </div>
+              <div class="store-icons">
+                <a [href]="projectDetail.androidURL" target="_blank" *ngIf="projectDetail.androidURL"><img src="/assets/images/google-play.png" class="img-fluid me-2"></a>
+                <a [href]="projectDetail.appleURL" target="_blank" *ngIf="projectDetail.appleURL"><img src="/assets/images/apple-store.png" class="img-fluid"></a>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+    </div>
+

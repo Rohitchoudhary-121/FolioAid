@@ -1,0 +1,39 @@
+.containe {
+  width: auto;
+  margin-left: -12px
+}
+.cards .item img {
+    height: 200px !important;
+}
+.dir {
+  float: right;
+  margin-top: -13px;
+  border:none;
+}
+
+.containe {
+  width: auto;
+  margin-left: -12px
+}
+element.style {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 20px;
+}
+#text{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    padding-right:20px;
+}
+.pills {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 20px;
+}
+.containe {
+  width: auto;
+  margin-left: -12px
+}

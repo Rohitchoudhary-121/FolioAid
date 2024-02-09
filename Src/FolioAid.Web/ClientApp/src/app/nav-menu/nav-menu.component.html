@@ -1,0 +1,53 @@
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a [routerLink]="['']" class="logo">
+              <img src="assets/images/Logo.png" alt="">
+            </a>
+           
+            <!-- ***** Logo End ***** -->
+            <!-- ***** Menu Start ***** -->
+            <ul class="nav">
+              <li class="scroll-to-section" *ngIf="!loggedIn"><a href="#features" class="active">Features</a></li>
+              <li class="scroll-to-section" *ngIf="!loggedIn"><a href="#aboutus">About Us</a></li>
+              <li class="scroll-to-section" *ngIf="!loggedIn"><a href="#contact">Contact</a></li>
+              <li class="scroll-to-section" *ngIf="loggedIn"><a [routerLink]="['/project-listing']">Projects</a></li>
+              <li class="scroll-to-section" *ngIf="!loggedIn">
+                <div class="login-btn butn"><a [routerLink]="['/userlogin']">Login</a></div>
+              </li>
+              <li class="scroll-to-section" *ngIf="!loggedIn">
+                <div class="login-btn outline"><a [routerLink]="['/sign-up']">Sign Up</a></div>
+              </li>
+
+              <li class="scroll-to-section profile-div mt-1" *ngIf="loggedIn">
+                <div class="profile-nav dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                     aria-expanded="false">
+                  <i class="fa fa-user"></i>
+                  <span *ngIf="fullName" class="name">{{fullName}}</span>
+                </div>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user me-2"></i> Profile</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear me-2"></i> Settings</a></li>
+                  <li (click)="logOut()" class="cursor-for-logout">
+                    <a class="dropdown-item">
+                      <i class="fa-solid fa-arrow-right-from-bracket me-2"></i>
+                      Logout
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <a class='menu-trigger'>
+              <span>Menu</span>
+            </a>
+            <!-- ***** Menu End ***** -->
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  
